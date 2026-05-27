@@ -15,7 +15,7 @@ index.html        App shell (nav, hero, both tabs, iframes)
 manifest.json     PWA manifest
 sw.js             Service worker (offline shell cache)
 icons/            PWA icons (icon-192.png, icon-512.png)
-assets/           inquirED / Inquiry Journeys logo SVGs
+assets/           inquirED logo SVGs (green + white)
 tools/            generate-icons.html — regenerate the PWA icons
 netlify.toml      Deploy config (publish root, no-cache on sw.js)
 ```
