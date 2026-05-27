@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Generator — Inquiry Journeys</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #FDE4B0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 16px;
+      color: #333548;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #2d4a47;
+      margin-bottom: 6px;
+    }
+    .subtitle { color: #4B7774; margin-bottom: 36px; font-size: 0.95rem; text-align: center; }
+    .cards { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(51,53,72,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    canvas { border-radius: 22%; }
+    .btn {
+      background: #4B7774;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 26px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #3a5f5c; }
+    .label { font-size: 0.8rem; color: #757575; font-weight: 700; }
+    .instructions {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      max-width: 480px;
+      box-shadow: 0 4px 20px rgba(51,53,72,0.08);
+      border-left: 4px solid #E8B540;
+    }
+    .instructions h2 { font-size: 1.1rem; font-weight: 900; color: #2d4a47; margin-bottom: 12px; }
+    .instructions ol { padding-left: 20px; color: #515151; line-height: 1.8; font-size: 0.9rem; }
+    .instructions code { background: #FDE4B0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<h1>App Icon Generator</h1>
+<p class="subtitle">Inquiry Work Gallery — click the buttons below to download your icons</p>
+
+<div class="cards">
+  <div class="card">
+    <span class="label">192 × 192 px</span>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <button class="btn" onclick="download('canvas192', 'icon-192.png')">Download icon-192.png</button>
+  </div>
+  <div class="card">
+    <span class="label">512 × 512 px</span>
+    <canvas id="canvas512" width="512" height="512" style="width:128px;height:128px"></canvas>
+    <button class="btn" onclick="download('canvas512', 'icon-512.png')">Download icon-512.png</button>
+  </div>
+</div>
+
+<div class="instructions">
+  <h2>What to do with these files</h2>
+  <ol>
+    <li>Click <strong>both</strong> download buttons above</li>
+    <li>Find your project folder (the folder with <code>index.html</code>)</li>
+    <li>Inside that folder, create a new folder called <code>icons</code></li>
+    <li>Move both downloaded files into that <code>icons</code> folder</li>
+    <li>You're ready to upload to Netlify!</li>
+  </ol>
+</div>
+
+<script>
+  // Real inquirED wordmark (white), drawn onto a Dark Green tile (Inquiry Hub style).
+  const LOGO_SRC = '../assets/inquirED_Logo_White.svg';
+  const logoImg = new Image();
+  let logoReady = false;
+
+  function drawIcon(canvasId, size) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    const s = size;
+
+    // Background: inquirED Dark Green tile (#144745, deepening toward the bottom)
+    const grad = ctx.createLinearGradient(0, 0, s, s);
+    grad.addColorStop(0, '#144745');
+    grad.addColorStop(1, '#0E3332');
+    ctx.fillStyle = grad;
+    roundRect(ctx, 0, 0, s, s, s * 0.22);
+    ctx.fill();
+
+    // Centered white IJ wordmark, scaled to ~72% of the tile width
+    if (logoReady && logoImg.naturalWidth) {
+      const maxW = s * 0.72;
+      const maxH = s * 0.5;
+      const ratio = logoImg.naturalWidth / logoImg.naturalHeight;
+      let w = maxW, h = w / ratio;
+      if (h > maxH) { h = maxH; w = h * ratio; }
+      ctx.drawImage(logoImg, (s - w) / 2, (s - h) / 2, w, h);
+    }
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function download(canvasId, filename) {
+    const canvas = document.getElementById(canvasId);
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = filename;
+    a.click();
+  }
+
+  function renderAll() {
+    drawIcon('canvas192', 192);
+    drawIcon('canvas512', 512);
+  }
+
+  logoImg.onload = () => { logoReady = true; renderAll(); };
+  logoImg.onerror = () => { renderAll(); };
+  logoImg.src = LOGO_SRC;
+  renderAll();
+</script>
+</body>
+</html>

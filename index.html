@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#144745">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Inquiry Work Gallery">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Inquiry Work Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* inquirED parent palette (Inquiry Hub) */
+      --green:        #144745;  /* primary dark green — hero, logo, headings */
+      --green-hover:  #0E3332;
+      --green-med:    #B1E0BB;
+      --green-light:  #E4FBCE;
+      --purple:       #5B5A9E;
+      --button:       #333548;  /* navy pill buttons (Enroll / Follow style) */
+      --button-hover: #25273a;
+
+      /* Neutrals */
+      --white:        #FFFFFF;
+      --beige:        #F6EFE7;
+      --blue-tint:    #EAEEF5;
+      --border:       #E5E7EB;
+      --grey-mid:     #757575;
+      --grey-dark:    #515151;
+
+      /* Semantic */
+      --bg:           #FFFFFF;
+      --bg-tint:      #f4f8f4;
+      --text:         #1a1a1a;
+      --text-mid:     #515151;
+      --text-light:   #757575;
+
+      /* Spacing */
+      --nav-height: 64px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+
+      /* Shape */
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   18px;
+      --radius-full: 9999px;
+
+      /* Shadow */
+      --shadow-sm: 0 1px 3px rgba(20,71,69,0.08);
+      --shadow-md: 0 4px 16px rgba(20,71,69,0.10);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* ── TOP NAV (Inquiry Hub style) ── */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--white);
+      height: calc(var(--nav-height) + var(--safe-top));
+      padding-top: var(--safe-top);
+      display: flex;
+      align-items: stretch;
+      padding-left: 20px;
+      padding-right: 20px;
+      gap: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      height: 30px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: stretch;
+      gap: 26px;
+    }
+
+    .nav-tab {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      padding: 0 2px;
+      cursor: pointer;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 3px;
+      background: var(--green);
+      border-radius: 3px 3px 0 0;
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-tab:hover { color: var(--green); }
+    .nav-tab.active { color: var(--green); font-weight: 700; }
+    .nav-tab.active::after { transform: scaleX(1); }
+
+    .nav-spacer { flex: 1; }
+
+    /* ── PANELS ── */
+    .panels-wrapper {
+      position: fixed;
+      top: calc(var(--nav-height) + var(--safe-top));
+      left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: none;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .panel.active { display: flex; }
+
+    /* ── HERO (full-width dark green banner) ── */
+    .hero {
+      background: var(--green);
+      padding: 40px 24px 38px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -70px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(177,224,187,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; max-width: 1080px; margin: 0 auto; width: 100%; }
+
+    .hero-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--green-med);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--green-med);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    /* ── CONTENT ── */
+    .panel-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 24px 28px;
+      gap: 18px;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--button);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 11px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      align-self: flex-start;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .open-btn:hover, .open-btn:active {
+      background: var(--button-hover);
+      box-shadow: var(--shadow-md);
+    }
+
+    .open-btn .material-icons-round { font-size: 17px; }
+
+    .iframe-container {
+      flex: 1;
+      min-height: 520px;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: var(--bg-tint);
+      border: 1px solid var(--border);
+    }
+
+    .spinner-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: var(--bg-tint);
+      z-index: 2;
+      transition: opacity 0.35s ease;
+    }
+
+    .spinner-wrap.hidden { opacity: 0; pointer-events: none; }
+
+    .spinner {
+      width: 38px; height: 38px;
+      border: 3px solid var(--green-med);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    .spinner-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .gallery-iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── FOOTER NOTE ── */
+    .footer-note {
+      background: var(--green-light);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .footer-note .material-icons-round {
+      font-size: 18px;
+      color: var(--green);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .footer-note p {
+      font-size: 0.85rem;
+      color: var(--green);
+      line-height: 1.55;
+    }
+
+    .footer-note strong { font-weight: 700; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .top-nav { gap: 16px; padding-left: 14px; padding-right: 14px; }
+      .nav-tabs { gap: 16px; }
+      .nav-logo { height: 26px; }
+      .hero { padding: 32px 18px 30px; }
+      .panel-content { padding: 18px 16px 22px; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { padding: 56px 24px 52px; }
+      .panel-content { padding: 32px 24px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav" role="navigation">
+  <a class="nav-brand" href="#" aria-label="inquirED">
+    <img class="nav-logo" src="assets/inquirED_Logo_Green.svg" alt="inquirED" />
+  </a>
+
+  <div class="nav-tabs" role="tablist">
+    <button class="nav-tab active" role="tab" aria-selected="true" data-panel="gallery" onclick="switchTab('gallery')">Gallery</button>
+    <button class="nav-tab" role="tab" aria-selected="false" data-panel="submit" onclick="switchTab('submit')">Submit Work</button>
+  </div>
+
+  <div class="nav-spacer"></div>
+</nav>
+
+<!-- PANELS -->
+<div class="panels-wrapper">
+
+  <!-- GALLERY PANEL -->
+  <section class="panel active" id="panel-gallery" role="tabpanel" aria-label="Gallery">
+    <div class="hero">
+      <div class="hero-inner">
+        <p class="hero-label">Student Showcase</p>
+        <h1>Inquiry Work Gallery</h1>
+        <p>Browse student work and projects from across inquiry units.</p>
+      </div>
+    </div>
+
+    <div class="panel-content">
+      <a class="open-btn" href="https://web.miniextensions.com/d6g65XJXSVzDkmjoDu17" target="_blank" rel="noopener noreferrer">
+        <span class="material-icons-round">open_in_new</span>
+        Open in Browser
+      </a>
+
+      <div class="iframe-container">
+        <div class="spinner-wrap" id="gallery-spinner">
+          <div class="spinner"></div>
+          <span class="spinner-text">Loading gallery…</span>
+        </div>
+        <iframe
+          class="gallery-iframe"
+          id="gallery-iframe"
+          src="https://web.miniextensions.com/d6g65XJXSVzDkmjoDu17"
+          title="Inquiry Work Gallery"
+          loading="lazy"
+          onload="hideSpinner('gallery-spinner')"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT PANEL -->
+  <section class="panel" id="panel-submit" role="tabpanel" aria-label="Submit Work">
+    <div class="hero">
+      <div class="hero-inner">
+        <p class="hero-label">Share Your Learning</p>
+        <h1>Submit Your Work</h1>
+        <p>Upload photos and reflections from your inquiry journey.</p>
+      </div>
+    </div>
+
+    <div class="panel-content">
+      <a class="open-btn" href="https://web.miniextensions.com/L7LtgoOXjk3sLnaxxv4n" target="_blank" rel="noopener noreferrer">
+        <span class="material-icons-round">open_in_new</span>
+        Open in Browser
+      </a>
+
+      <div class="iframe-container">
+        <div class="spinner-wrap" id="submit-spinner">
+          <div class="spinner"></div>
+          <span class="spinner-text">Loading form…</span>
+        </div>
+        <iframe
+          class="gallery-iframe"
+          id="submit-iframe"
+          src="https://web.miniextensions.com/L7LtgoOXjk3sLnaxxv4n"
+          title="Submit Your Inquiry Work"
+          loading="lazy"
+          onload="hideSpinner('submit-spinner')"
+        ></iframe>
+      </div>
+
+      <div class="footer-note">
+        <span class="material-icons-round">info</span>
+        <p><strong>Note:</strong> Please submit a separate form if you have photos from more than one inquiry unit.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // ── TAB SWITCHING ──
+  function switchTab(panelId) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    document.getElementById('panel-' + panelId).classList.add('active');
+    const activeBtn = document.querySelector(`[data-panel="${panelId}"]`);
+    activeBtn.classList.add('active');
+    activeBtn.setAttribute('aria-selected', 'true');
+  }
+
+  // ── SPINNER ──
+  function hideSpinner(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  }
+
+  // ── SERVICE WORKER ──
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

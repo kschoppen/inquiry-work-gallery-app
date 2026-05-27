@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Keep the service worker fresh so deploys propagate to installed clients.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
