@@ -1,0 +1,312 @@
+/* inquirED brand tokens, copied from the inquirED Brand System (tokens/foundation.css and tokens/brands/inquired.css). Don't edit here; copy again when the brand system changes. Lato by Lukasz Dziedzic, SIL Open Font License 1.1. */
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/lato-400.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/lato-700.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 900; font-display: swap; src: url('../fonts/lato-900.woff2') format('woff2'); }
+/* Generated from tokens/brand-tokens.json by scripts/export-claude-design.py. Don't edit; change the repo
+   and re-sync. Foundation: shared by every brand. Brand files (tokens/brands/*.css) layer on top. */
+
+:root {
+  /* Type: Lato for every brand and surface (typography.md) */
+  --font-family: Lato, Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Type ramp, web desktop (type.canvases.web-desktop; line heights type.lineHeights) */
+  --type-display-size: 72px;
+  --type-display-line: 88px;
+  --type-display-weight: 900;
+  --type-display: 900 72px/88px var(--font-family);
+  --type-h1-size: 56px;
+  --type-h1-line: 68px;
+  --type-h1-weight: 900;
+  --type-h1: 900 56px/68px var(--font-family);
+  --type-h2-size: 42px;
+  --type-h2-line: 52px;
+  --type-h2-weight: 700;
+  --type-h2: 700 42px/52px var(--font-family);
+  --type-h3-size: 32px;
+  --type-h3-line: 40px;
+  --type-h3-weight: 700;
+  --type-h3: 700 32px/40px var(--font-family);
+  --type-h4-size: 24px;
+  --type-h4-line: 32px;
+  --type-h4-weight: 700;
+  --type-h4: 700 24px/32px var(--font-family);
+  --type-body-l-size: 18px;
+  --type-body-l-line: 28px;
+  --type-body-l-weight: 400;
+  --type-body-l: 400 18px/28px var(--font-family);
+  --type-body-size: 16px;
+  --type-body-line: 24px;
+  --type-body-weight: 400;
+  --type-body: 400 16px/24px var(--font-family);
+  --type-body-s-size: 14px;
+  --type-body-s-line: 20px;
+  --type-body-s-weight: 400;
+  --type-body-s: 400 14px/20px var(--font-family);
+  --type-caption-size: 12px;
+  --type-caption-line: 16px;
+  --type-caption-weight: 400;
+  --type-caption: 400 12px/16px var(--font-family);
+
+  /* Type sizes on the other canvases (type.canvases); docs-pt values are points */
+  --type-web-phone-display: 42px;
+  --type-web-phone-h1: 36px;
+  --type-web-phone-h2: 28px;
+  --type-web-phone-h3: 24px;
+  --type-web-phone-h4: 20px;
+  --type-web-phone-body-l: 18px;
+  --type-web-phone-body: 16px;
+  --type-web-phone-body-s: 14px;
+  --type-web-phone-caption: 12px;
+  --type-email-desktop-h1: 32px;
+  --type-email-desktop-h2: 24px;
+  --type-email-desktop-h3: 18px;
+  --type-email-desktop-h4: 16px;
+  --type-email-desktop-body-l: 18px;
+  --type-email-desktop-body: 16px;
+  --type-email-desktop-body-s: 14px;
+  --type-email-desktop-caption: 12px;
+  --type-email-phone-h1: 28px;
+  --type-email-phone-h2: 24px;
+  --type-email-phone-h3: 18px;
+  --type-email-phone-h4: 16px;
+  --type-email-phone-body-l: 18px;
+  --type-email-phone-body: 16px;
+  --type-email-phone-body-s: 14px;
+  --type-email-phone-caption: 12px;
+  --type-docs-px-display: 42px;
+  --type-docs-px-h1: 32px;
+  --type-docs-px-h2: 24px;
+  --type-docs-px-h3: 18px;
+  --type-docs-px-h4: 14px;
+  --type-docs-px-body-l: 16px;
+  --type-docs-px-body: 14px;
+  --type-docs-px-body-s: 12px;
+  --type-docs-px-caption: 12px;
+  --type-docs-pt-display: 31.5pt;
+  --type-docs-pt-h1: 24pt;
+  --type-docs-pt-h2: 18pt;
+  --type-docs-pt-h3: 13.5pt;
+  --type-docs-pt-h4: 10.5pt;
+  --type-docs-pt-body-l: 12pt;
+  --type-docs-pt-body: 10.5pt;
+  --type-docs-pt-body-s: 9pt;
+  --type-docs-pt-caption: 9pt;
+  --type-screen-docs-display: 56px;
+  --type-screen-docs-h1: 42px;
+  --type-screen-docs-h2: 32px;
+  --type-screen-docs-h3: 24px;
+  --type-screen-docs-h4: 16px;
+  --type-screen-docs-body-l: 18px;
+  --type-screen-docs-body: 16px;
+  --type-screen-docs-body-s: 14px;
+  --type-screen-docs-caption: 12px;
+  --type-slides-display: 120px;
+  --type-slides-h1: 96px;
+  --type-slides-h2: 72px;
+  --type-slides-h3: 56px;
+  --type-slides-h4: 42px;
+  --type-slides-body-l: 48px;
+  --type-slides-body: 42px;
+  --type-slides-body-s: 36px;
+  --type-slides-caption: 36px;
+  --type-social-display: 80px;
+  --type-social-h1: 72px;
+  --type-social-h2: 56px;
+  --type-social-h4: 48px;
+  --type-social-body: 48px;
+  --type-social-body-s: 42px;
+  --type-social-caption: 32px;
+  --type-landscape-display: 64px;
+  --type-landscape-h1: 56px;
+  --type-landscape-h2: 42px;
+  --type-landscape-body: 36px;
+  --type-landscape-body-s: 32px;
+  --type-landscape-caption: 24px;
+  --type-docs-pt-dense-h1: 18pt;
+  --type-docs-pt-dense-h2: 12pt;
+  --type-docs-pt-dense-body: 9pt;
+  --type-docs-pt-dense-body-s: 8pt;
+  --type-docs-pt-dense-caption: 8pt;
+  --type-screen-docs-dense-body: 14px;
+  --type-size-list: 12, 14, 16, 18, 20, 24, 28, 32, 36, 42, 48, 56, 64, 72, 80, 96;   /* px; every size on a screen */
+
+  /* Spacing (space.scale) and the web proximity tiers (space.proximity) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --space-attached: 8px;
+  --space-related: 16px;
+  --space-group: 32px;
+  --space-section: 96px;
+  --page-side: 48px;
+  --page-side-phone: 24px;
+  --container: 1280px;
+  --text-column: 720px;
+  --section-space: 96px;
+  --section-space-phone: 56px;
+
+  /* Radius (radius.web; other canvases below) */
+  --radius-control: 4px;
+  --radius-panel: 8px;
+  --radius-media: 16px;
+  --radius-round: 50%;
+  --radius-print-pt-control: 3pt;
+  --radius-print-pt-panel: 6pt;
+  --radius-print-pt-media: 12pt;
+  --radius-slides-control: 6px;
+  --radius-slides-panel: 12px;
+  --radius-slides-media: 24px;
+  --radius-landscape-control: 8px;
+  --radius-landscape-panel: 16px;
+  --radius-landscape-media: 32px;
+  --radius-social-control: 12px;
+  --radius-social-panel: 24px;
+  --radius-social-media: 48px;
+
+  /* Elevation (elevation; no shadow on buttons, badges, text, callouts). Depth comes from shadow, never a stroke. */
+  --elevation-flat: none;
+  --elevation-raised: 0 1px 2px rgba(20,71,69,.10), 0 2px 6px rgba(20,71,69,.08);
+  --elevation-overlay: 0 8px 16px rgba(20,71,69,.14), 0 0 1px rgba(20,71,69,.24);
+  --elevation-media: 0 2px 4px rgba(20,71,69,.10), 0 8px 20px rgba(20,71,69,.10);
+  --elevation-media-social: 0 4px 8px rgba(20,71,69,.10), 0 16px 40px rgba(20,71,69,.10);
+
+  /* Greys (color.greys) */
+  --grey-0: #FFFFFF;
+  --grey-100: #F5F5F5;
+  --grey-200: #E0E0E0;
+  --grey-300: #CECECE;
+  --grey-400: #ABABAB;
+  --grey-500: #898989;
+  --grey-600: #757575;
+  --grey-700: #515151;
+  --grey-800: #2B2B2B;
+  --grey-900: #000000;
+  --grey-canvas: #F2F2F2;
+
+  /* inquirED palette (color.inquired) and its tints (color.tints) */
+  --color-dark-green: #144745;
+  --color-light-green: #E4FBCE;
+  --color-light-purple: #DAD0FF;
+  --color-light-blue: #EAEEF5;
+  --color-light-beige: #F6EFE7;
+  --color-medium-green: #B1E0BB;
+  --color-dark-purple: #1C2660;
+  --color-medium-purple: #5B5A9E;
+  --color-medium-purple-dark: #4D4996;
+  --color-pink: #F99792;
+  --color-yellow: #F7EC89;
+  --tint-dark-green-90: #2B5958;
+  --tint-dark-green-80: #436C6A;
+  --tint-dark-green-70: #5B7E7D;
+  --tint-dark-green-60: #72918F;
+  --tint-dark-green-50: #8AA3A2;
+  --tint-dark-green-40: #A1B5B5;
+  --tint-dark-green-30: #B8C8C7;
+  --tint-dark-green-20: #D0DADA;
+  --tint-dark-green-10: #E8EDEC;
+  --tint-medium-purple-60: #9D9CC5;
+  --tint-medium-purple-40: #BDBDD8;
+  --tint-medium-purple-20: #DEDEEC;
+  --tint-medium-green-60: #D0ECD6;
+  --tint-medium-green-40: #E0F3E4;
+  --tint-medium-green-20: #EFF9F1;
+  --tint-pink-40: #FDD5D3;
+  --tint-pink-20: #FEEAE9;
+  --tint-pink-10: #FEF5F4;
+  --tint-yellow-40: #FCF7D0;
+  --tint-yellow-20: #FDFBE7;
+  --tint-yellow-10: #FEFDF3;
+  --tint-light-green-60: #EFFDE2;
+  --tint-light-green-40: #F4FDEB;
+  --tint-light-green-20: #FAFEF5;
+  --tint-light-purple-60: #E9E3FF;
+  --tint-light-purple-40: #F0ECFF;
+  --tint-light-purple-20: #F8F6FF;
+  --tint-light-blue-60: #F2F5F9;
+  --tint-light-blue-40: #F7F8FB;
+  --tint-light-blue-20: #FBFCFD;
+  --tint-light-beige-60: #FAF5F1;
+  --tint-light-beige-40: #FBF9F5;
+  --tint-light-beige-20: #FDFCFA;
+
+  /* Charts (color.chart): categories in order, then Other; the agree scale; the sequential ramp, light
+     to dark, for magnitude (five steps at most, values labeled or a scale legend) */
+  --chart-category-1: #144745;
+  --chart-category-2: #5B5A9E;
+  --chart-category-3: #E37F7A;
+  --chart-category-4: #9F8315;
+  --chart-other: #8AA3A2;
+  --chart-agree-1: #5B5A9E;
+  --chart-agree-2: #9D9CC5;
+  --chart-agree-3: #E0E0E0;
+  --chart-agree-4: #8AA3A2;
+  --chart-agree-5: #144745;
+  --chart-sequential-1: #D0DADA;
+  --chart-sequential-2: #A1B5B5;
+  --chart-sequential-3: #72918F;
+  --chart-sequential-4: #436C6A;
+  --chart-sequential-5: #144745;
+
+  /* Status (color.status) */
+  --status-error: #B3261E;
+  --status-error-bg: #F9DEDC;
+
+  /* Components (components.*), web sizes */
+  --badge-weight: 700;
+  --badge-size: 12px;
+  --badge-pad-y: 4px;
+  --badge-pad-x: 8px;
+  --badge-radius: 4px;
+  --badge-tracking: 1px;   /* 1px at 12px, scale with size */
+  --badge-fill-on-light-ground: rgba(255,255,255,.55);
+  --button-weight: 700;
+  --button-size: 16px;
+  --button-pad-y: 16px;
+  --button-pad-x: 24px;
+  --button-radius: 4px;
+  --button-tracking: 0.4px;
+  --link-weight: 700;
+  --callout-radius: 8px;
+  --card-radius: 8px;
+  --card-padding: 24px;
+  --photo-overlay-opacity: 0.8;
+}
+/* Generated from tokens/brand-tokens.json (brands.inquired, documents.themes.inquired) by
+   scripts/export-claude-design.py. Don't edit; change the repo and re-sync.
+   inquirED: set data-brand="inquired" (also the default at :root). */
+
+:root,
+[data-brand="inquired"] {
+  --brand-primary: #144745;   /* BE1: the lead brand's primary color */
+  --brand-head: #144745;   /* headings */
+  --brand-body: #000000;   /* body text is black on every brand */
+  --brand-link: #5B5A9E;   /* links: bold, never underlined, standalone links end in ' >>' */
+  --brand-rule: #144745;
+  --brand-callout-1: #F6EFE7;   /* callout fill */
+  --brand-callout-2: #EAEEF5;
+  --brand-quote-panel: #F6EFE7;
+  --brand-quote-text: #144745;
+  --brand-table-grid: #F6EFE7;
+  --brand-badge-text: #144745;
+  --brand-badge-fill: #E8EDEC;   /* badge on white */
+  --brand-hero-ground: #144745;
+  --brand-hero-text: #FFFFFF;
+  --brand-hero-link: #DAD0FF;
+  --brand-button-fill: #144745;
+  --brand-button-text: #FFFFFF;
+  --brand-button-secondary-fill: #E4FBCE;   /* secondary button on white */
+  --brand-button-secondary-text: #144745;
+  --chart-highlight: #5B5A9E;   /* one highlighted value */
+}

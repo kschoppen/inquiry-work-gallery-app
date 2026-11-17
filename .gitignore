@@ -1,2 +1,6 @@
 .DS_Store
 *.numbers
+node_modules/
+.mock-outbox/
+.netlify/
+.env

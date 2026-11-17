@@ -1,7 +1,30 @@
+# Inquiry Work Gallery. Static pages in public/, functions in netlify/functions, sign-in gate in netlify/edge-functions.
+# There is no build step: Netlify installs the packages in package.json for the functions and publishes public/ as it is.
 [build]
-  publish = "."
+  publish = "public"
 
-# Keep the service worker fresh so deploys propagate to installed clients.
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["contests.json"]
+
+# The gate declares its own paths (netlify/edge-functions/gate.ts, `config`).
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000"
+    # Scripts and styles come from this site only. Photos load straight from Airtable. Inline style attributes are allowed; inline scripts are not.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://*.airtableusercontent.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+# Keep the service worker fresh: it only exists to clear the old app's offline copy from phones that have it.
 [[headers]]
   for = "/sw.js"
   [headers.values]
